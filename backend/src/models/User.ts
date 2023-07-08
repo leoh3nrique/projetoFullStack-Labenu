@@ -11,7 +11,11 @@ export interface UserDB {
     role: USER_ROLES,
     created_at: string
 }
-
+export interface TokenPayload {
+    id: string,
+    name: string,
+    role: USER_ROLES
+}
 
 export class User {
     constructor(
