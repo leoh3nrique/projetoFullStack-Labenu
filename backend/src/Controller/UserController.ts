@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { UserBusiness } from "../Business/UserBusiness";
 import { SignupSchema } from "../dtos/user/signup.dto";
+import { LoginSchema } from "../dtos/login.dto";
 
 
 export class UserController {
@@ -22,6 +23,21 @@ export class UserController {
         } catch (error) {
             console.log(error)
         }
-
     }
+    public login = async (req:Request, res:Response)=>{
+        try{
+            const input = LoginSchema.parse({
+                email:req.body.email,
+                password:req.body.password
+            })
+
+            const output = this.userBusiness.login(input)
+
+            return output
+            
+        }catch(error){
+            console.log(error)
+        }
+    }
+
 }
