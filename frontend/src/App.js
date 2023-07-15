@@ -1,10 +1,12 @@
-import "./App.css";
+import GlobalState from "./context/GlobalState";
+import Router from "./router/Router";
 
 function App() {
-  return <div className="App">
-    
-
-  </div>;
+  return (
+    <GlobalState>
+      <Router />
+    </GlobalState>
+  );
 }
 
 export default App;
