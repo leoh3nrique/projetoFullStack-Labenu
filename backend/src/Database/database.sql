@@ -10,6 +10,8 @@ CREATE TABLE
         created_at TEXT DEFAULT(DATETIME()) NOT NULL
     );
 
+    
+
 CREATE TABLE
     posts(
         id TEXT NOT NULL UNIQUE PRIMARY KEY,

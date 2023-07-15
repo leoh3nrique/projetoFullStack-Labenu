@@ -31,9 +31,9 @@ export class UserController {
                 password: req.body.password
             })
 
-            const output = this.userBusiness.login(input)
+            const output = await this.userBusiness.login(input)
 
-            return output
+            res.status(201).send(output)
 
         } catch (error) {
             console.log(error)

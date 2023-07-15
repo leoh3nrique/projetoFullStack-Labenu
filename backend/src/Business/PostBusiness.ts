@@ -37,7 +37,7 @@ export class PostBusiness {
         }
 
         const data = await this.postDatabase.getPosts()
-        
+
         const posts = await Promise.all(
             data.map(async (post) => {
                 const postWithCreatorName = new Post(
@@ -60,7 +60,7 @@ export class PostBusiness {
                 return postWithCreatorName.toModel();
             })
         )
-        
+
         const output: GetPostOutputDto[] = posts
         return output
     }
@@ -154,44 +154,44 @@ export class PostBusiness {
 
     }
 
-//     public getLikesDislikes = async (input: LikesDislikesInputDto): Promise<void> => {
-//         const { id, token, like } = input
+    //     public getLikesDislikes = async (input: LikesDislikesInputDto): Promise<void> => {
+    //         const { id, token, like } = input
 
-//         const payload = this.tokenManager.getPayload(token)
+    //         const payload = this.tokenManager.getPayload(token)
 
-//         if (payload === null) {
-//             throw new BadRequestError("token inválido")
-//         }
+    //         if (payload === null) {
+    //             throw new BadRequestError("token inválido")
+    //         }
 
-//         const [postDb] = await this.postDatabase.findLikeInTableLikesByUserId(payload.id)
+    //         const [postDb] = await this.postDatabase.findLikeInTableLikesByUserId(payload.id)
 
-//         if (!postDb) {
-//             const [result] = await this.postDatabase.findPostByPostId(id)
+    //         if (!postDb) {
+    //             const [result] = await this.postDatabase.findPostByPostId(id)
 
-//             if (result.creator_id === payload.id) {
-//                 throw new BadRequestError("Você nao pode dar like no seu propro post")
-//             }
-//             const input: LikesDislikesDB = {
-//                 post_id: id,
-//                 user_id: payload.id,
-//                 like: like
-//             }
-//             await this.postDatabase.insertLikeInPost(input)
-//         } else {
-//             if (postDb.like === 1 && like === true) {
-//                 await this.postDatabase.deleteLikeFromTableLikes(payload.id)
-//             }
-//             else if (postDb.like === 0 && like === false) {
-//                 await this.postDatabase.deleteLikeFromTableLikes(payload.id)
-//             }
-            
-//             else if (postDb.like === 0 && like === true) {
-//                 await this.postDatabase.editLikeInPostByUserId(like, payload.id)
-//             }
+    //             if (result.creator_id === payload.id) {
+    //                 throw new BadRequestError("Você nao pode dar like no seu propro post")
+    //             }
+    //             const input: LikesDislikesDB = {
+    //                 post_id: id,
+    //                 user_id: payload.id,
+    //                 like: like
+    //             }
+    //             await this.postDatabase.insertLikeInPost(input)
+    //         } else {
+    //             if (postDb.like === 1 && like === true) {
+    //                 await this.postDatabase.deleteLikeFromTableLikes(payload.id)
+    //             }
+    //             else if (postDb.like === 0 && like === false) {
+    //                 await this.postDatabase.deleteLikeFromTableLikes(payload.id)
+    //             }
 
-//             else if (postDb.like === 1 && like === false) {
-//                 await this.postDatabase.editLikeInPostByUserId(like, payload.id)
-//             }
-//         }
-//     }
+    //             else if (postDb.like === 0 && like === true) {
+    //                 await this.postDatabase.editLikeInPostByUserId(like, payload.id)
+    //             }
+
+    //             else if (postDb.like === 1 && like === false) {
+    //                 await this.postDatabase.editLikeInPostByUserId(like, payload.id)
+    //             }
+    //         }
+    //     }
 }
