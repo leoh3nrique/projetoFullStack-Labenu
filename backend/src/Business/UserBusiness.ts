@@ -1,5 +1,5 @@
 import { UserDatabase } from "../Database/UserDatabase";
-import { LoginInputDto, LoginOutputDto } from "../dtos/login.dto";
+import { LoginInputDto, LoginOutputDto } from "../dtos/user/login.dto";
 import { SignupIputDto, SignupOutputDto } from "../dtos/user/signup.dto";
 import { TokenPayload, USER_ROLES, User, UserDB } from "../models/User";
 import { HashManager } from "../services/HashManager";
@@ -57,18 +57,18 @@ export class UserBusiness {
         return output
     }
 
-    public async login(input: LoginInputDto){
-        const {email, password} = input
-        
-        const userDB:UserDB = await this.userDatabase.findUserByEmail(email)
-        if(!userDB){
+    public async login(input: LoginInputDto) {
+        const { email, password } = input
+
+        const userDB: UserDB = await this.userDatabase.findUserByEmail(email)
+        if (!userDB) {
             throw new Error("Usuário não encontrado")
         }
 
-        const hashedPassword:string = userDB.password
+        const hashedPassword: string = userDB.password
 
-        const isCorrect:boolean = await this.hashManager.compare(password, hashedPassword)
-        if(!isCorrect){
+        const isCorrect: boolean = await this.hashManager.compare(password, hashedPassword)
+        if (!isCorrect) {
             throw new Error("email ou senha invalidos")
         }
 
@@ -87,7 +87,7 @@ export class UserBusiness {
         }
 
         const token = this.tokenManager.createToken(payload)
-        
+
         const output: LoginOutputDto = {
             token: token
         }

@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { UserBusiness } from "../Business/UserBusiness";
 import { SignupSchema } from "../dtos/user/signup.dto";
-import { LoginSchema } from "../dtos/login.dto";
+import { LoginSchema } from "../dtos/user/login.dto";
 
 
 export class UserController {
@@ -12,11 +12,11 @@ export class UserController {
     public signup = async (req: Request, res: Response) => {
         try {
             const input = SignupSchema.parse({
-                name:req.body.name,
-                email:req.body.email,
-                password:req.body.password
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password
             })
-        
+
             const output = await this.userBusiness.signup(input)
 
             res.status(201).send(output)
@@ -24,18 +24,18 @@ export class UserController {
             console.log(error)
         }
     }
-    public login = async (req:Request, res:Response)=>{
-        try{
+    public login = async (req: Request, res: Response) => {
+        try {
             const input = LoginSchema.parse({
-                email:req.body.email,
-                password:req.body.password
+                email: req.body.email,
+                password: req.body.password
             })
 
             const output = this.userBusiness.login(input)
 
             return output
-            
-        }catch(error){
+
+        } catch (error) {
             console.log(error)
         }
     }
